@@ -1,3 +1,11 @@
+"""
+# coding:utf-8
+@Time    : 2021/01/03
+@Author  : oriyao
+@mail    : ylzhangyao@gmail.com
+@File    : __initial__.py
+@Describe: for create flask app and mongodb
+"""
 from flask import Flask, url_for
 from flask_login import LoginManager
 from importlib import import_module
@@ -21,7 +29,7 @@ def create_app(config_name=None):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config[config_name])
     # app.logger.warning(app.config["MONGO_URI"] )
-    app.config["MONGO_URI"] = "mongodb://testuser:testpassword@152.32.132.155:27017/test20210102?authSource=admin"
+    # app.config["MONGO_URI"] = "mongodb://oriyaoflask:changeme_123@152.32.132.155:27017/test20210102?authSource=admin"
     register_extensions(app)
     register_blueprints(app)
     configure_database(app)
