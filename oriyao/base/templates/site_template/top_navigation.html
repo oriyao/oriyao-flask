@@ -5,6 +5,14 @@
     </div>
 
     <ul class="nav navbar-nav navbar-right">
+      {% if not current_user.is_authenticated %}
+      <li class="">
+        <a href="/login" class="user-profile">
+          <img src="/static/images/img.jpg" alt="">LOGIN
+          <span class=" fa fa-sign-in"></span>
+        </a>
+      </li>
+      {% else %}
       <li class="">
         <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <img src="/static/images/img.jpg" alt="">{{ current_user.username }}
@@ -87,6 +95,8 @@
           </li>
         </ul>
       </li>
+      {% endif %}
     </ul>
+
   </nav>
 </div>

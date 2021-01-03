@@ -15,7 +15,7 @@ from logging.handlers import RotatingFileHandler
 from os import path
 import os
 from oriyao.setting import config
-from oriyao.mydb import initial_mongodb
+from oriyao.mydb import initial_mongodb,initial_quota
 
 from flask_pymongo import PyMongo
 
@@ -94,5 +94,10 @@ def register_cmd(app):
     def initdb():
         """Initialize the database."""
         initial_mongodb()
+
+    """Initialize the quota collection."""
+    @app.cli.command()
+    def initquota():
+        initial_quota()
 
 

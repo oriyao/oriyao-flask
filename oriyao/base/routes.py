@@ -21,14 +21,18 @@ from oriyao.base.forms import LoginForm, CreateAccountForm
 from oriyao.base.models import Mongouser
 
 
-@blueprint.route('/')
+@blueprint.route('/', methods=['GET', 'POST'])
 def route_default():
-    return redirect(url_for('base_blueprint.login'))
+    current_app.logger.warning('redirect to homepage')
+    if 'login' in request.form:
+        fullname = request.form['fullname']
+    return render_template('main.html')
 
 
 @blueprint.route('/<template>')
 @login_required
 def route_template(template):
+
     return render_template(template + '.html')
 
 
@@ -43,7 +47,7 @@ def route_errors(error):
     return render_template('errors/page_{}.html'.format(error))
 
 ## Login & Registration
-@blueprint.route('/login', methods=['GET', 'POST'])
+@blueprint.route('/login/', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm(request.form)
     create_account_form = CreateAccountForm(request.form)
@@ -101,7 +105,7 @@ def create_user():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('base_blueprint.login'))
+    return redirect(url_for('base_blueprint.route_default'))
 
 
 @blueprint.route('/shutdown')

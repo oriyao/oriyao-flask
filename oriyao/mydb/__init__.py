@@ -52,3 +52,19 @@ def initial_mongodb():
     print(dblist)
     print(collection_list)
     print(users)
+
+def initial_quota():
+    current_app.logger.info('Initial my quota.')
+    mymongodb = current_app.config['MONGO_DATABASE']
+    myclient = pymongo.MongoClient(current_app.config['MONGO_URI_WITHOUTDB'])
+    my_mongo_db = myclient[mymongodb]
+    collection_quota = my_mongo_db["quota"]
+    default_quota = {"username": 'Anonymous',
+                     "create_time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
+                     "quota": 'Some ideas!',
+                     "description":'Some description!',
+                     "is_delete":'False'
+                     }
+    collection_quota.insert_one(default_quota)
+    quotas = collection_quota.find_one({"username": 'Anonymous'})
+    print(quotas)
