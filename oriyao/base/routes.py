@@ -15,10 +15,10 @@ from flask_login import (
     logout_user
 )
 
-from app import mongo, login_manager
-from app.base import blueprint
-from app.base.forms import LoginForm, CreateAccountForm
-from app.base.models import Mongouser
+from oriyao import mongo, login_manager
+from oriyao.base import blueprint
+from oriyao.base.forms import LoginForm, CreateAccountForm
+from oriyao.base.models import Mongouser
 
 
 @blueprint.route('/')

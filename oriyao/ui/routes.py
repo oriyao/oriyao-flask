@@ -1,4 +1,4 @@
-from app.ui import blueprint
+from oriyao.ui import blueprint
 from flask import render_template
 from flask_login import login_required
 

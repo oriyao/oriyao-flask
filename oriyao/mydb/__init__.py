@@ -30,7 +30,7 @@ def initial_mongodb():
         print("Create new database!")
         # ADD user to admin, for new database connection
     print("Create new admin user!")
-    myclient.admin.add_user(current_app.config['MONGO_DATABASE_ADMIN_USER'],current_app.config['MONGO_DATABASE_PASSWD'], roles=[{'role': 'readWrite', 'db': mymongodb}])
+    myclient.admin.add_user(str(current_app.config['MONGO_DATABASE_ADMIN_USER']),str(current_app.config['MONGO_DATABASE_PASSWD']), roles=[{'role': 'readWrite', 'db': mymongodb}])
     # myclient.admin.add_user('oriyaoflask',
     #                         'changeme_123', roles=[{'role': 'readWrite', 'db': mymongodb}])
     # Connect to new databse

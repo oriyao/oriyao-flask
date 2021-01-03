@@ -7,7 +7,7 @@
 @Describe: User model
 """
 from flask_login import UserMixin
-from app import login_manager,mongo
+from oriyao import login_manager,mongo
 from flask import current_app
 
 

@@ -14,8 +14,8 @@ from logging.handlers import RotatingFileHandler
 
 from os import path
 import os
-from app.setting import config
-from app.mydb import initial_mongodb
+from oriyao.setting import config
+from oriyao.mydb import initial_mongodb
 
 from flask_pymongo import PyMongo
 
@@ -64,7 +64,7 @@ def register_extensions(app):
 
 def register_blueprints(app):
     for module_name in ('base', 'forms', 'ui', 'home', 'tables', 'data', 'additional', 'base'):
-        module = import_module('app.{}.routes'.format(module_name))
+        module = import_module('oriyao.{}.routes'.format(module_name))
         app.register_blueprint(module.blueprint)
 
 
