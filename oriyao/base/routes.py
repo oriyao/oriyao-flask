@@ -17,9 +17,9 @@ from flask_login import (
 
 from oriyao import mongo, login_manager
 from oriyao.base import blueprint
-from oriyao.base.forms import LoginForm, CreateAccountForm
+from oriyao.base.forms import LoginForm, CreateAccountForm, DayQuota
 from oriyao.base.models import Mongouser
-
+import time
 
 @blueprint.route('/', methods=['GET', 'POST'])
 def route_default():
@@ -27,6 +27,50 @@ def route_default():
     if 'login' in request.form:
         fullname = request.form['fullname']
     return render_template('main.html')
+
+
+
+@blueprint.route('/quota', methods=['GET', 'POST'])
+def route_quota():
+    DayQuota_form = DayQuota(request.form)
+    quotas = get_quotas()
+    if request.method == "GET":
+        DayQuota_form.username.data = 'Anonymous'
+        if current_user.is_authenticated:
+            DayQuota_form.username.data = current_user.username
+        return render_template('quota.html', DayQuota_form=DayQuota_form,quotas=quotas)
+    if DayQuota_form.validate_on_submit():
+        username = DayQuota_form.username.data
+        content = DayQuota_form.content.data
+        quota = DayQuota_form.quota.data
+        quotadate = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        mongo_save_messages(quotadate, username, content, quota)
+        return render_template('quota.html', DayQuota_form=DayQuota_form,quotas=quotas)
+    return render_template('quota.html', DayQuota_form=DayQuota_form,quotas=quotas)
+
+@blueprint.route('/quota-show')
+def route_quota_show():
+    collection_quotas = mongo.db['quota']
+    quotas = collection_quotas.find().sort('quotadate',-1)
+    return render_template('quota_show.html',quotas=quotas)
+
+
+
+
+
+def mongo_save_messages(quotadate,username,content,quota):
+    quota_collection = mongo.db['quota']
+    quota_content = {"quotadate": quotadate, "username":username, "content": content, "quota": quota}
+    quota_collection.insert_one(quota_content)
+    return 'OK'
+ 
+
+def get_quotas():
+    collection_quotas = mongo.db['quota']
+    quotas = collection_quotas.find().sort('quotadate',-1)
+    return quotas
+
+
 
 
 @blueprint.route('/<template>')
