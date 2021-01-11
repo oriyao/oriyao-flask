@@ -68,3 +68,36 @@ def initial_quota():
     collection_quota.insert_one(default_quota)
     quotas = collection_quota.find_one({"username": 'Anonymous'})
     print(quotas)
+
+def initial_games():
+    current_app.logger.info('Initial my games.')
+    mymongodb = current_app.config['MONGO_DATABASE']
+    myclient = pymongo.MongoClient(current_app.config['MONGO_URI_WITHOUTDB'])
+    my_mongo_db = myclient[mymongodb]
+    collection_games = my_mongo_db["games"]
+    default_games = {"name_en": 'CyberPunk 2077',
+		     "name_cn": '赛博朋克2077',
+		     "cover":'/app/cyber.png',
+		     "platform":'PlayStation',
+		     "link":'http://www.openstack.top',
+		     "about":'夜之城',
+		     "grade":'90',
+	             "status":'hold',
+		     "floor_price":'225',
+		     "purchase_price":'347',
+		     "purchase_time":'2020-12-13',
+		     "purchase_channel":'淘宝上海彭彭',
+		     "publish_time":'2020-12-07',
+		     "finishing_time":'2021-01-10',
+		     "selling_time":'2021-01-10',
+                     "update_time": time.strftime("%Y-%m-%d", time.localtime()),
+                     "is_delete":'False'
+                     }
+    collection_games.insert_one(default_games)
+    # games = collection_quota.find_one({"username": 'Anonymous'})
+    games = collection_games.find()
+    for game in games:
+        print(game)
+    return "OK"
+
+
