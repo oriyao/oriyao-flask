@@ -29,6 +29,11 @@ def route_default():
     return render_template('main.html')
 
 
+@blueprint.route('/games-show')
+def route_games_show():
+    collection_games = mongo.db['games']
+    games = collection_games.find().sort('update_time',-1)
+    return render_template('games.html',games=games)
 
 @blueprint.route('/quota', methods=['GET', 'POST'])
 def route_quota():
