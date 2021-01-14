@@ -100,4 +100,38 @@ def initial_games():
         print(game)
     return "OK"
 
+def initial_housing_mortgage():
+    mymongodb = current_app.config['MONGO_DATABASE']
+    myclient = pymongo.MongoClient(current_app.config['MONGO_URI_WITHOUTDB'])
+    my_mongo_db = myclient[mymongodb]
+    collection_mortgage = my_mongo_db["mortgage"]
+    dafault_mortgage = {"periods":'1',
+                        "payment":'3457.73',
+                        "principal":'640.23',
+                        "interest":'2817.5',
+                        "debt":'599359.77',
+                        "paid-up":'YES',
+                        "due-date":'2019-10-21',
+                        "actual-payment":'5071.5',
+                        "notes":'首月利息',
+                        "update":'2019-10-21'
+                        }
+    collection_mortgage.insert_one(dafault_mortgage)
+    mortgages = collection_mortgage.find()
+    for mortgage in mortgages:
+        print(mortgage)
+    return "OK"
+
+
+
+
+
+
+
+
+
+
+
+
+
 
