@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, PasswordField,StringField,TextAreaField,SubmitField
-from wtforms.validators import DataRequired,Length,Regexp
+from wtforms import TextField, PasswordField,StringField,TextAreaField,SubmitField,RadioField,IntegerField,SelectField,DateField,FloatField,DateTimeField
+from wtforms.validators import DataRequired,Length,Regexp,NumberRange,EqualTo
+import datetime
+import time
 ## login and registration
 
 
@@ -31,3 +33,28 @@ class DayQuota(FlaskForm):
                           validators=[Length(min=3, max=200, message='3到200位之间')],
                           render_kw={'class': 'form-control','placeholder': '不超过200个字符'})
     submit = SubmitField(u'发布', render_kw={'class': 'btn btn-secondary'})
+
+class GamesForm(FlaskForm):
+    username = StringField(u'用户名',validators=[DataRequired()],render_kw={'placeholder': '请输入用户名长度1-8之间'})
+    name_cn = StringField(u'中文名',validators=[DataRequired()],render_kw={'placeholder': '请输入中文名'})
+    name_en = StringField(u'English Name',validators=[DataRequired()],render_kw={'placeholder': 'Input English Name'})    
+    # 平台
+    vendor = RadioField('Platform',choices=[('NS','Nintendo Switch'),('PS','PlayStation'),('XBOX','Xbox Seres')],validators=[DataRequired()],default='NS')
+    # 评分
+    grade = IntegerField('评分',validators=[NumberRange(min=0,max=100)],default=60)
+    # 状态
+    status = SelectField('状态',choices=[('hold','已购'),('wish','待购')],default='wish')
+
+    # 价格
+    floor_price = FloatField('史低价格',default=300)
+    purchase_price = FloatField('购买价格',default=300)
+
+    # 发布时间
+    deftime=datetime.datetime.today()
+    publish_time =DateTimeField('发布时间',format='%Y-%m-%d',default=deftime)
+    finishing_time =DateTimeField('结束时间',format='%Y-%m-%d',default=deftime)
+    purchase_time =DateTimeField('买入时间',format='%Y-%m-%d',default=deftime)
+    finishing_time =DateTimeField('结束时间',format='%Y-%m-%d',default=deftime)
+    selling_time =DateTimeField('卖出时间',format='%Y-%m-%d',default=deftime)
+    submit = SubmitField(u'添加', render_kw={'class': 'btn btn-secondary'})
+

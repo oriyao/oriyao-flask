@@ -17,7 +17,7 @@ from flask_login import (
 
 from oriyao import mongo, login_manager
 from oriyao.base import blueprint
-from oriyao.base.forms import LoginForm, CreateAccountForm, DayQuota
+from oriyao.base.forms import LoginForm, CreateAccountForm, DayQuota,GamesForm
 from oriyao.base.models import Mongouser
 import time
 
@@ -34,6 +34,28 @@ def route_games_show():
     collection_games = mongo.db['games']
     games = collection_games.find().sort('update_time',-1)
     return render_template('games.html',games=games)
+
+@blueprint.route('/games-add', methods=['GET', 'POST'])
+def route_gamesadd():
+    games_form = GamesForm(request.form)
+    if request.method == "GET":
+        if current_user.is_authenticated:
+            games_form.username.data = current_user.username
+        return render_template('games_add.html', games_form=games_form)
+    if games_form.validate_on_submit():
+        username = games_form.username.data
+        vendor = games_form.vendor.data
+        quotadate = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        current_app.logger.info('Games ADD:' + str(vendor))
+        if mongo_save_games(games_form):
+            return redirect(url_for('base_blueprint.route_games_show'))
+        else:
+            return render_template('games_add.html', games_form=games_form)
+    return render_template('games_add.html', games_form=games_form)
+
+
+
+
 
 @blueprint.route('/quota', methods=['GET', 'POST'])
 def route_quota():
@@ -59,7 +81,25 @@ def route_quota_show():
     quotas = collection_quotas.find().sort('quotadate',-1)
     return render_template('quota_show.html',quotas=quotas)
 
-
+def mongo_save_games(games_form):
+    current_app.logger.info('Add an new game in games collection')
+    games_collection = mongo.db['games']
+    game_content = {
+            "username":games_form.username.data,
+            "name_cn":games_form.name_cn.data,
+            "name_en":games_form.name_en.data,
+            "vendor":games_form.vendor.data,
+            "grade":games_form.grade.data,
+            "status":games_form.status.data,
+            "floor_price":games_form.floor_price.data,
+            "purchase_price":games_form.purchase_price.data,
+            "publish_time":games_form.publish_time.data,
+            "finishing_time":games_form.finishing_time.data,
+            "purchase_time":games_form.purchase_time.data,
+            "selling_time":games_form.selling_time.data
+            }
+    games_collection.insert_one(game_content)
+    return True
 
 
 
