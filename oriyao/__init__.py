@@ -15,7 +15,7 @@ from logging.handlers import RotatingFileHandler
 from os import path
 import os
 from oriyao.setting import config
-from oriyao.mydb import initial_mongodb,initial_quota,initial_games,initial_housing_mortgage
+from oriyao.mydb import initial_mongodb,initial_quota,initial_games,initial_housing_mortgage,initial_statistics
 
 from flask_pymongo import PyMongo
 
@@ -107,5 +107,9 @@ def register_cmd(app):
     @app.cli.command()
     def initmortgage():
         initial_housing_mortgage()
+
+    @app.cli.command()
+    def initstatistics():
+        initial_statistics()
 
 

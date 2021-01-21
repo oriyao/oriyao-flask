@@ -122,7 +122,23 @@ def initial_housing_mortgage():
         print(mortgage)
     return "OK"
 
-
+def initial_statistics():
+    mymongodb = current_app.config['MONGO_DATABASE']
+    myclient = pymongo.MongoClient(current_app.config['MONGO_URI_WITHOUTDB'])
+    my_mongo_db = myclient[mymongodb]
+    collection_statistics = my_mongo_db["statistics"]
+    default_statistic = {
+            "name":'oriyao',
+            "date":time.strftime("%Y-%m-%d", time.localtime()),
+            "visitstatistics": 0,
+            "commentstatistics": 0,
+            "likestatistics": 0
+            }
+    collection_statistics.insert_one(default_statistic)
+    results = collection_statistics.find({'date':time.strftime("%Y-%m-%d", time.localtime())})
+    for result in results:
+        print(result)
+    return "OK"
 
 
 

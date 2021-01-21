@@ -24,6 +24,22 @@ import time
 @blueprint.route('/', methods=['GET', 'POST'])
 def route_default():
     current_app.logger.warning('redirect to homepage')
+    collection_statistics = mongo.db['statistics']
+    condition = {'date':time.strftime("%Y-%m-%d", time.localtime())}
+    visitstatistics = collection_statistics.find_one(condition)
+    if visitstatistics is None:
+        default_statistic = {
+            "name":'oriyao',
+            "date":time.strftime("%Y-%m-%d", time.localtime()),
+            "visitstatistics": 1,
+            "commentstatistics": 0,
+            "likestatistics": 0
+            }
+        collection_statistics.insert_one(default_statistic)
+    else:
+        visitstatistics['visitstatistics'] += 1
+        collection_statistics.update(condition,visitstatistics)
+
     if 'login' in request.form:
         fullname = request.form['fullname']
     return render_template('main.html')
