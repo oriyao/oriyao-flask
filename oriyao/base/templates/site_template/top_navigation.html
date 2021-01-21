@@ -7,6 +7,7 @@
       <a href="http://www.openstack.top:1980/" class="user-profile"><i class=" fa fa-home">Home</i></a>
     </div>
 
+
     <ul class="nav navbar-nav navbar-right">
       {% if not current_user.is_authenticated %}
       <li class="">
@@ -99,6 +100,7 @@
         </ul>
       </li>
       {% endif %}
+      <li><a href="/loveme"><i class="fa fa-heart"></i></a></li>
     </ul>
 
   </nav>

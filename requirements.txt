@@ -6,8 +6,12 @@ Flask-WTF==0.14.3
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
+prettytable==2.0.0
+pyecharts==1.9.0
 pymongo==3.11.2
 python-dotenv==0.15.0
+simplejson==3.17.2
 uWSGI==2.0.19.1
+wcwidth==0.2.5
 Werkzeug==1.0.1
 WTForms==2.3.3

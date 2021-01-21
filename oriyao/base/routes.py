@@ -221,6 +221,35 @@ def shutdown():
     func()
     return 'Server shutting down...'
 
+
+
+
+
+## Statistics
+@blueprint.route('/loveme')
+def loveme():
+    collection_statistics = mongo.db['statistics']
+    condition = {'date':time.strftime("%Y-%m-%d", time.localtime())}
+    likestatistics = collection_statistics.find_one(condition)
+    if likestatistics is None:
+        default_statistic = {
+            "name":'oriyao',
+            "date":time.strftime("%Y-%m-%d", time.localtime()),
+            "visitstatistics": 1,
+            "commentstatistics": 0,
+            "likestatistics": 0
+        }
+        collection_statistics.insert_one(default_statistic)
+    else:
+        likestatistics['likestatistics'] += 1
+        collection_statistics.update(condition,likestatistics)
+    return render_template('main.html')
+
+
+
+
+
+
 ## Errors
 
 
