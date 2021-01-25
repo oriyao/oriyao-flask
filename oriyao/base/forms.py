@@ -58,3 +58,18 @@ class GamesForm(FlaskForm):
     selling_time =DateTimeField('卖出时间',format='%Y-%m-%d',default=deftime)
     submit = SubmitField(u'添加', render_kw={'class': 'btn btn-secondary'})
 
+class MortgageForm(FlaskForm):
+    periods = IntegerField('期数',validators=[NumberRange(min=0,max=360)],default=1)
+    status = SelectField('状态',choices=[('yes','已还'),('no','待还')],default='yes')
+    actual_payment = FloatField('实际还款',default=3457.73)
+    payment = FloatField('本期还款',default=3457.73)
+    principal = FloatField('本期本金',default=300)
+    interest = FloatField('本期利息',default=300)
+    debt = FloatField('剩余本金',default=300)
+    deftime=datetime.datetime.today()
+    due_date =DateTimeField('还款日期',format='%Y-%m-%d',default=deftime)
+    notes = TextAreaField(u'备注',render_kw={'class': 'form-control','placeholder': '不超过200个字符'})
+    update =DateTimeField('更新时间',format='%Y-%m-%d',default=deftime)
+    submit = SubmitField(u'添加', render_kw={'class': 'btn btn-secondary'})
+
+

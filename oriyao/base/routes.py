@@ -17,7 +17,7 @@ from flask_login import (
 
 from oriyao import mongo, login_manager
 from oriyao.base import blueprint
-from oriyao.base.forms import LoginForm, CreateAccountForm, DayQuota,GamesForm
+from oriyao.base.forms import LoginForm, CreateAccountForm, DayQuota,GamesForm,MortgageForm
 from oriyao.base.models import Mongouser
 import time
 
@@ -52,6 +52,7 @@ def route_games_show():
     return render_template('games.html',games=games)
 
 @blueprint.route('/games-add', methods=['GET', 'POST'])
+@login_required
 def route_gamesadd():
     games_form = GamesForm(request.form)
     if request.method == "GET":
@@ -69,8 +70,27 @@ def route_gamesadd():
             return render_template('games_add.html', games_form=games_form)
     return render_template('games_add.html', games_form=games_form)
 
+@blueprint.route('/mortgage-add', methods=['GET', 'POST'])
+@login_required
+def route_mortgage_add():
+    mortgage_form = MortgageForm(request.form)
+    mortgage_collection = mongo.db['mortgage']
+    laste = mortgage_collection.find().count()
+    mortgage = mortgage_collection.find_one({'periods':laste})
 
-
+    if request.method == "GET":
+        mortgage_form.periods.data = mortgage['periods'] + 1
+        mortgage_form.debt.data= mortgage['debt']
+        mortgage_form.debt.data= mortgage['debt']
+        mortgage_form.principal.data= mortgage['principal']
+        mortgage_form.interest.data= mortgage['interest']
+        return render_template('mortgage_add.html', mortgage_form=mortgage_form)
+    if mortgage_form.validate_on_submit():
+        if mongo_save_mortgage(mortgage_form):
+            return redirect(url_for('base_blueprint.route_mortgage_add'))
+        else:
+            return render_template('mortgage_add.html', mortgage_form=mortgage_form)
+    return render_template('mortgage_add.html', mortgage_form=mortgage_form)
 
 
 @blueprint.route('/quota', methods=['GET', 'POST'])
@@ -117,6 +137,22 @@ def mongo_save_games(games_form):
     games_collection.insert_one(game_content)
     return True
 
+
+
+def mongo_save_mortgage(mortgage_form):
+    mortgage_collection = mongo.db['mortgage']
+    mortgage_content = {"periods": mortgage_form.periods.data,
+        "status": mortgage_form.status.data,
+        "due_date": mortgage_form.due_date.data.strftime("%Y-%m-%d"),
+        "payment": mortgage_form.payment.data,
+        "principal": mortgage_form.principal.data,
+        "interest": mortgage_form.interest.data,
+        "actual-payment": mortgage_form.actual_payment.data,
+        "debt": mortgage_form.debt.data,                        
+        "notes": mortgage_form.notes.data,
+        "update": mortgage_form.update.data.strftime("%Y-%m-%d")}
+    mortgage_collection.insert_one(mortgage_content)
+    return True
 
 
 def mongo_save_messages(quotadate,username,content,quota):

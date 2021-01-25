@@ -26,7 +26,7 @@ class Mongouser(UserMixin):
 def user_loader(username):
     collection_users = mongo.db['oriyao_users']
     users = collection_users.find_one({"name": username})
-    current_app.logger.info('login_manager.user_loader：' + str(users))
+    # current_app.logger.info('login_manager.user_loader：' + str(users))
     if users:
         return Mongouser(username=users['name'])
     return None
@@ -35,7 +35,7 @@ def user_loader(username):
 def request_loader(request):
     username = request.form.get('username')
     collection_users = mongo.db['oriyao_users']
-    current_app.logger.info('Login manager request loader：' + str(collection_users))
+    # current_app.logger.info('Login manager request loader：' + str(collection_users))
     users = collection_users.find_one({"name": username})
     if users:
         return Mongouser(username=users['name'])
