@@ -7,7 +7,7 @@
 @Describe: main
 """
 
-from flask import jsonify, render_template, redirect, request, url_for,current_app
+from flask import flash, jsonify, render_template, redirect, request, url_for,current_app
 from flask_login import (
     current_user,
     login_required,
@@ -26,6 +26,7 @@ import time
 
 @blueprint.route('/main_page')
 def main_page():
+    flash('Welcome back to openstack.top','success')
     return render_template('main/main_home.html')
 
 
