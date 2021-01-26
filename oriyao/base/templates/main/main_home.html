@@ -1,0 +1,91 @@
+{% extends "main/main.html" %}
+{% block title %}Home{% endblock %}
+
+{% block home_content %}
+<!--author box-->
+<div class="author-bio">
+    <div class="author-image mb-30">
+        <a href="#">
+            <img src="{{ url_for('static', filename = 'assets/imgs/author.png') }}" alt="" class="avatar">
+        </a></div>
+    <div class="author-info">
+        <h3>
+            <span class="vcard author">
+            <span class="fn">
+                <a href="#" title="Posts by Robert" rel="author">oriyao</a>
+            </span>
+            </span>
+        </h3>
+        <h5>About openstack.top</h5>
+        <div id="oneWord" class="author-description"></div>
+        <a href="#" class="author-bio-link">View all posts</a>
+        <div class="author-social">
+            <ul class="author-social-icons">
+                <li class="author-social-link-facebook"><a href="#" target="_blank"><i class="ti-facebook"></i></a></li>
+                <li class="author-social-link-twitter"><a href="#" target="_blank"><i class="ti-twitter-alt"></i></a></li>
+                <li class="author-social-link-pinterest"><a href="#" target="_blank"><i class="ti-pinterest"></i></a></li>
+                <li class="author-social-link-instagram"><a href="#" target="_blank"><i class="ti-instagram"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--related posts-->
+<div class="related-posts">
+    <h3 class="mb-30">Related posts</h3>
+    <div class="loop-list">
+        {% for blog in blogs %}
+        <article class="row mb-30">
+            <div class="col-md-4">
+                <div class="post-thumb position-relative thumb-overlay">
+                    <div class="img-hover-slide border-radius-5 position-relative" style="background-image: url({{ blog.pre_img }})">
+                        <a class="img-link" href="/blog/article/{{ blog.id }}/"></a>
+                        <span class="top-right-icon background8"><i class="mdi mdi-flash-on"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 align-center-vertical">
+                <div class="post-content">
+                    <div class="entry-meta meta-0 font-small mb-15"><a href="/blog/cate/{{ blog.type_id }}/"><span class="post-cat background2 color-white">{{ cates[loop.index0] }}</span></a></div>
+                    <h4 class="post-title">
+                        <a href="/blog/article/{{ blog.id }}/">{{ blog.title }}</a>
+                    </h4>
+                    <div class="entry-meta meta-1 font-small color-grey mt-15 mb-15">
+                        <span class="post-on"><i class="ti-marker-alt"></i>{{ moment(blog.create_time, local=True).fromNow(refresh=True) }}</span>
+                        <span class="time-reading"><i class="ti-timer"></i>{{ blog.comments|length }}</span>
+                        <span class="hit-count"><i class="ti-bolt"></i> {{ blog.read_times }}</span>
+                    </div>
+                    <p class="font-medium">{{ blog.introduce|striptags|truncate(100) }}</p>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<!--每日一句获取接口脚本-->
+<script>
+    // 打开页面自动加载
+    $(function () {
+        $(document).ready(function () {
+            getOne();
+        });
+    })
+
+    // 获取每日一句
+    function getOne(){
+        $.ajax({
+            type: "GET",
+            url: "http://api.youngam.cn/api/one.php",
+            dataType: "json",
+            success: function(result){
+                $("#oneWord").text(result['data'][0]['text']+'  ———— 「ONE · 一个」');
+                return false;
+            }
+        });
+    }
+</script>
+{% endblock %}
+

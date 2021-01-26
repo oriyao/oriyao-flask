@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+{% block head %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %} - oriyao</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicon.png">
+    <!-- UltraNews CSS  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'assets/css/widgets.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'assets/css/color.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'assets/css/responsive.css') }}">
+</head>
+{% endblock %}
+
+
+<body>
+
+<!-- 正文 -->
+{% block content %}
+{% endblock %}
+
+<!-- Vendor JS-->
+{% include "main/vendor_js.html" %}
+
+
+
+{% block script %} {% endblock %}
+
+</body>
+</html>

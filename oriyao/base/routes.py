@@ -21,6 +21,23 @@ from oriyao.base.forms import LoginForm, CreateAccountForm, DayQuota,GamesForm,M
 from oriyao.base.models import Mongouser
 import time
 
+
+
+
+@blueprint.route('/main_page')
+def main_page():
+    return render_template('main/main_home.html')
+
+
+
+
+
+
+
+
+
+
+
 @blueprint.route('/', methods=['GET', 'POST'])
 def route_default():
     current_app.logger.warning('redirect to homepage')

@@ -1,0 +1,146 @@
+<div class="col-lg-4 col-md-12 col-sm-12 primary-sidebar sticky-sidebar">
+<div class="widget-area pl-30">
+    <!--Widget about-->
+    <div class="sidebar-widget widget-about mb-50 pt-30 pr-30 pb-30 pl-30 background12 border-radius-5">
+        <h5 class="mb-20">Welcom, I'm oriyao<img class="about-author-img float-right ml-30" src="" alt=""></h5>
+        <p class="font-medium"> This is my personal blog, You could contact me by follow ways:</p>
+        <ul class="header-social-network d-inline-block list-inline color-white mb-20">
+            <li class="list-inline-item"><a class="social-icon facebook-icon text-xs-center" target="_blank" href="#"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a class="social-icon twitter-icon text-xs-center" target="_blank" href="#"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a class="social-icon pinterest-icon text-xs-center" target="_blank" href="#"><i class="ti-pinterest"></i></a></li>
+            <li class="list-inline-item"><a class="social-icon instagram-icon text-xs-center" target="_blank" href="#"><i class="ti-instagram"></i></a></li>
+        </ul>
+        <p>
+            <a class="readmore-btn font-small text-uppercase font-weight-ultra" href="#">Contact me<i class="ti-arrow-right ml-5"></i></a>
+        </p>
+    </div>
+    <!--Widget social-->
+    <div class="sidebar-widget widget-social-network mb-50">
+        <div class="widget-header position-relative mb-20 pb-10">
+            <h5 class="widget-title mb-10">Follow Us</h5>
+            <div class="bt-1 border-color-1"></div>
+        </div>
+        <div class="social-network">
+            <div class="follow-us d-flex align-items-center">
+                <a class="follow-us-facebook clearfix mr-5 mb-10" href="#" target="_blank">
+                    <div class="social-icon">
+                        <i class="ti-facebook mr-5 v-align-space"></i>
+                        <i class="ti-facebook mr-5 v-align-space nth-2"></i>
+                    </div>
+                    <span class="social-name">博客总数</span>
+                    <span class="social-count counter-number">65</span><span class="social-count">篇</span>
+                </a>
+                <a class="follow-us-twitter clearfix ml-5 mb-10" href="#" target="_blank">
+                    <div class="social-icon">
+                        <i class="ti-twitter-alt mr-5 v-align-space"></i>
+                        <i class="ti-twitter-alt mr-5 v-align-space nth-2"></i>
+                    </div>
+                    <span class="social-name">图片总数</span>
+                    <span class="social-count counter-number">75</span><span class="social-count">篇</span>
+                </a>
+            </div>
+            <div class="follow-us d-flex align-items-center">
+                <a class="follow-us-instagram clearfix mr-5" href="#" target="_blank">
+                    <div class="social-icon">
+                        <i class="ti-instagram mr-5 v-align-space"></i>
+                        <i class="ti-instagram mr-5 v-align-space nth-2"></i>
+                    </div>
+                    <span class="social-name">今日访问</span>
+                    <span class="social-count counter-number">2</span><span class="social-count">次</span>
+                </a>
+                <a class="follow-us-youtube clearfix ml-5" href="#" target="_blank">
+                    <div class="social-icon">
+                        <i class="ti-youtube mr-5 v-align-space"></i>
+                        <i class="ti-youtube mr-5 v-align-space nth-2"></i>
+                    </div>
+                    <span class="social-name">七日访问</span>
+                    <span class="social-count counter-number">28</span><span class="social-count">次</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--Widget categories-->
+    <div class="sidebar-widget widget_categories mb-50">
+        <div class="widget-header position-relative mb-20 pb-10">
+            <h5 class="widget-title mb-10">Categories</h5>
+            <div class="bt-1 border-color-1"></div>
+        </div>
+        <!--        文章分类-->
+        <div class="post-block-list post-module-1 post-module-5">
+            <ul>
+                {% for category in categories %}
+                <li class="cat-item cat-item-2">
+                    <a href="/blog/cate/{{ category.id }}/">{{ category.name }}</a>
+                    {{ category.counts }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!--Widget latest posts style 1-->
+    <div class="sidebar-widget widget_alitheme_lastpost mb-50">
+        <div class="widget-header position-relative mb-20 pb-10">
+            <h5 class="widget-title mb-10">Latest Posts</h5>
+            <div class="bt-1 border-color-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 sm-grid-content mb-30">
+                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
+                    <a href="#">
+                        <img src="{{ url_for('static', filename = 'assets/imgs/news-1.jpg') }}" alt="">
+                    </a>
+                </div>
+                <div class="post-content media-body">
+                    <h6 class="post-title mb-10 text-limit-2-row">广告展位-1</h6>
+                    <div class="entry-meta meta-1 font-x-small color-grey">
+                        <span class="post-on">25 April</span>
+                        <span class="hit-count has-dot">126k Views</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 sm-grid-content mb-30">
+                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
+                    <a href="#">
+                        <img src="{{ url_for('static', filename = 'assets/imgs/news-2.jpg') }}" alt="">
+                    </a>
+                </div>
+                <div class="post-content media-body">
+                    <h6 class="post-title mb-10 text-limit-2-row">广告展位-2</h6>
+                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
+                        <span class="post-on">25 April</span>
+                        <span class="hit-count has-dot">126k Views</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 sm-grid-content">
+                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
+                    <a href="#">
+                        <img src="{{ url_for('static', filename = 'assets/imgs/news-3.jpg') }}" alt="">
+                    </a>
+                </div>
+                <div class="post-content media-body">
+                    <h6 class="post-title mb-10 text-limit-2-row">广告展位-3</h6>
+                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
+                        <span class="post-on">25 April</span>
+                        <span class="hit-count has-dot">126k Views</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 sm-grid-content">
+                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
+                    <a href="single.html">
+                        <img src="{{ url_for('static', filename = 'assets/imgs/news-4.jpg') }}" alt="">
+                    </a>
+                </div>
+                <div class="post-content media-body">
+                    <h6 class="post-title mb-10 text-limit-2-row">广告展位-4</h6>
+                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
+                        <span class="post-on">25 April</span>
+                        <span class="hit-count has-dot">126k Views</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
