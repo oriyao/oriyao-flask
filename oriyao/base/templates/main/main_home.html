@@ -1,5 +1,5 @@
 {% extends "main/main.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}OpenStack.top{% endblock %}
 
 {% block home_content %}
 <!--author box-->
@@ -7,7 +7,8 @@
     <div class="author-image mb-30">
         <a href="#">
             <img src="{{ url_for('static', filename = 'assets/imgs/author.png') }}" alt="" class="avatar">
-        </a></div>
+        </a>
+    </div>
     <div class="author-info">
         <h3>
             <span class="vcard author">
@@ -20,7 +21,7 @@
         <div id="oneWord" class="author-description"></div>
         <a href="#" class="author-bio-link">View all posts</a>
 
-	<a href="#" onclick="giveLike()" id="givelike" ><i class="ti-facebook"></i></a>
+	<div onclick="giveLike()" id="givelike" ><i class="ti-facebook"></i></div>
 
         <div class="author-social">
             <ul class="author-social-icons">
@@ -73,28 +74,6 @@
 	function giveLike() {
 		document.getElementById("givelike").innerHTML = Date();
 	}
-</script>
-<!--每日一句获取接口脚本-->
-<script>
-    // 打开页面自动加载
-    $(function () {
-        $(document).ready(function () {
-            getOne();
-        });
-    })
-
-    // 获取每日一句
-    function getOne(){
-        $.ajax({
-            type: "GET",
-            url: "http://api.youngam.cn/api/one.php",
-            dataType: "json",
-            success: function(result){
-                $("#oneWord").text(result['data'][0]['text']+'  ———— 「ONE · 一个」');
-                return false;
-            }
-        });
-    }
 </script>
 {% endblock %}
 
