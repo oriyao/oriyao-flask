@@ -34,7 +34,7 @@
                                 </a>
                             </div>
                             <div class="post-content media-body">
-                                <h6 class="post-title mb-10 text-limit-2-row"><a href="#">Traveling Tends to Magnify All Human Emotions</a></h6>
+                                <h6 class="post-title mb-10 text-limit-2-row"><a href="#">Picture-one</a></h6>
                                 <div class="entry-meta meta-1 font-x-small color-grey">
                                     <span class="post-on">25 April</span>
                                     <span class="hit-count has-dot">26k Views</span>
@@ -46,11 +46,11 @@
                         <div class="d-flex">
                             <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
                                 <a class="color-white" href="#">
-                                    <img src="{{ url_for('static', filename = 'assets/imgs/thumbnail-2.jpg') }}" alt="">
+                                    <img src="{{ url_for('static', filename = 'assets/imgs/thumbnail-1.jpg') }}" alt="">
                                 </a>
                             </div>
                             <div class="post-content media-body">
-                                <h6 class="post-title mb-10 text-limit-2-row"><a href="#">The Luxury Of Traveling With Yacht</a></h6>
+                                <h6 class="post-title mb-10 text-limit-2-row"><a href="#">Picture-two</a></h6>
                                 <div class="entry-meta meta-1 font-x-small color-grey mt-10">
                                     <span class="post-on">25 April</span>
                                     <span class="hit-count has-dot">37k Views</span>
@@ -64,7 +64,7 @@
         <!--        广告-->
         <div class="sidebar-widget widget-ads mb-30">
             <a href="assets/imgs/news-1.jpg" class="play-video" data-animate="zoomIn" data-duration="1.5s" data-delay="0.1s">
-                <img src="{{ url_for('static', filename = 'assets/imgs/ads-1.jpg') }}" alt="">
+                <img src="{{ url_for('static', filename = 'assets/imgs/thumbnail-1.jpg') }}" alt="">
             </a>
         </div>
     </div>
@@ -105,9 +105,13 @@
                         </ul>
                         <div class="vline-space d-inline-block"></div>
                         <div class="user-account d-inline-block font-small">
+			{% if not current_user.is_authenticated %}
+			    <a class="color-white" href="/login" role="button">
+                                <i class="ti-user"></i><span>Login</span>
+                            </a>        
+			{% else %}
                             <a class="dropdown-toggle color-white" href="#" role="button" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ti-user"></i>
-                                <span>Account</span>
+                                <i class="ti-user"></i><span>Account</span>
                             </a>
                             <div id="userMenuDropdow" class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
                                 <a class="dropdown-item" href="#"><i class="ti-pencil-alt"></i>Edit Profile</a>
@@ -117,26 +121,20 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"><i class="ti-share"></i>Logout</a>
                             </div>
+			{% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--logo  and ads -->
+    <!--logo and ads -->
     <div class="header-logo background-white pt-20 pb-20 d-none d-lg-block">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-12 align-center-vertical">
-                    <a href="#">
-                        <img class="logo-img d-inline" src="{{ url_for('static', filename = 'assets/imgs/logo-2.png') }}" alt="">
-                    </a>
+		    <h2>OpenStack 2 Top</h2>
                 </div>
-<!--                <div class="col-lg-8 col-md-12 align-center-vertical d-none d-lg-inline text-right">-->
-<!--                    <a href="#">-->
-<!--                        <img class="ads-img d-inline" src="{{ url_for('static', filename = 'assets/imgs/ads-3.jpg') }}" alt="">-->
-<!--                    </a>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
@@ -153,332 +151,11 @@
                             <p class="font-small d-none d-md-inline">All Sections</p>
                         </div>
                     </div>
-                    <div class="logo-tablet d-md-inline d-lg-none d-none">
-                        <a href="#">
-                            <img class="logo-img d-inline" src="assets/imgs/logo-tablet.png" alt="">
-                        </a>
-                    </div>
-                    <div class="logo-mobile d-inline d-md-none">
-                        <a href="#">
-                            <img class="logo-img d-inline" src="assets/imgs/logo-mobile.png" alt="">
-                        </a>
-                    </div>
-                    <!-- Main-menu -->
                     <div class="main-nav text-left d-none d-lg-block">
                         <nav>
                             <ul id="navigation" class="main-menu">
                                 <li class="mega-menu-item">
-                                    <a href="#">Mega menu</a>
-                                    <div class="sub-mega-menu">
-                                        <div class="nav flex-column nav-pills" role="tablist">
-                                            <a class="nav-link active" data-toggle="pill" href="#news-0" role="tab">All</a>
-                                            <a class="nav-link" data-toggle="pill" href="#news-1" role="tab">Entertaiment</a>
-                                            <a class="nav-link" data-toggle="pill" href="#news-2" role="tab">Technology</a>
-                                            <a class="nav-link" data-toggle="pill" href="#news-3" role="tab">Travel</a>
-                                        </div>
-                                        <div class="tab-content">
-                                            <div class="tab-pane show active" id="news-0" role="tabpanel">
-                                                <div class="row">
-                                                    <div class="col-3 post-module-1">
-                                                        <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                            <a href="single.html">
-                                                                <img src="{{ url_for('static', filename = 'assets/imgs/news-1.jpg') }}" alt="">
-                                                            </a>
-                                                            <span class="top-right-icon background2">
-                                                                <i class="mdi mdi-audiotrack"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="post-content media-body">
-                                                            <h6 class="post-title mb-10 text-limit-2-row">The litigants on the screen are not actors </h6>
-                                                            <div class="entry-meta meta-1 font-x-small color-grey">
-                                                                <span class="post-on">25 April</span>
-                                                                <span class="hit-count has-dot">126k Views</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1">
-                                                        <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                            <a href="single.html">
-                                                                <img src="assets/imgs/news-2.jpg" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="post-content media-body">
-                                                            <h6 class="post-title mb-10 text-limit-2-row">Not a bit of hesitation, you better think twice</h6>
-                                                            <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                <span class="post-on">25 April</span>
-                                                                <span class="hit-count has-dot">126k Views</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1">
-                                                        <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                            <a href="single.html">
-                                                                <img src="assets/imgs/news-3.jpg" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="post-content media-body">
-                                                            <h6 class="post-title mb-10 text-limit-2-row">We got a right to pick a little fight, Bonanza </h6>
-                                                            <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                <span class="post-on">25 April</span>
-                                                                <span class="hit-count has-dot">126k Views</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1">
-                                                        <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                            <a href="single.html">
-                                                                <img src="assets/imgs/news-8.jpg" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="post-content media-body">
-                                                            <h6 class="post-title mb-10 text-limit-2-row">My entrance exam was on a book of matches </h6>
-                                                            <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                <span class="post-on">25 April</span>
-                                                                <span class="hit-count has-dot">126k Views</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane" id="news-1" role="tabpanel">
-                                                <div class="row">
-                                                    <div class="col-3 post-module-1">
-                                                        <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                            <a href="single.html">
-                                                                <img src="assets/imgs/news-5.jpg" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="post-content media-body">
-                                                            <h6 class="post-title mb-10 text-limit-2-row">The litigants on the screen are not actors </h6>
-                                                            <div class="entry-meta meta-1 font-x-small color-grey">
-                                                                <span class="post-on">25 April</span>
-                                                                <span class="hit-count has-dot">126k Views</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1">
-                                                        <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                            <a href="single.html">
-                                                                <img src="assets/imgs/news-6.jpg" alt="">
-                                                            </a>
-                                                            <span class="top-right-icon background3">
-                                                                <i class="mdi mdi-videocam"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="post-content media-body">
-                                                            <h6 class="post-title mb-10 text-limit-2-row">Not a bit of hesitation, you better think twice</h6>
-                                                            <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                <span class="post-on">25 April</span>
-                                                                <span class="hit-count has-dot">126k Views</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1">
-                                                        <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                            <a href="single.html">
-                                                                <img src="assets/imgs/news-7.jpg" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="post-content media-body">
-                                                            <h6 class="post-title mb-10 text-limit-2-row">We got a right to pick a little fight, Bonanza </h6>
-                                                            <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                <span class="post-on">25 April</span>
-                                                                <span class="hit-count has-dot">126k Views</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1">
-                                                        <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                            <a href="single.html">
-                                                                <img src="assets/imgs/news-8.jpg" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="post-content media-body">
-                                                            <h6 class="post-title mb-10 text-limit-2-row">My entrance exam was on a book of matches </h6>
-                                                            <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                <span class="post-on">25 April</span>
-                                                                <span class="hit-count has-dot">126k Views</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane" id="news-2" role="tabpanel">
-                                                <div class="row">
-                                                    <div class="col-3 post-module-1 text-left">
-                                                        <div class="post-thumb position-relative">
-                                                            <div class="thumb-overlay img-hover-slide border-radius-5 position-relative" style="background-image: url(assets/imgs/news-11.jpg)">
-                                                                <a class="img-link" href="single.html" tabindex="0"></a>
-                                                                <span class="top-right-icon background10">
-                                                                    <i class="mdi mdi-audiotrack"></i>
-                                                                </span>
-                                                                <div class="post-content-overlay">
-                                                                    <div class="entry-meta meta-0 font-small mb-10">
-                                                                        <a href="category.html" tabindex="0"><span class="post-cat background2 color-white">Gaming</span></a>
-                                                                    </div>
-                                                                    <h6 class="post-title">
-                                                                        <a class="color-white" href="single.html" tabindex="0">Tesla’s Cooking Up A New Way To Wire Its Cars, Report Says</a>
-                                                                    </h6>
-                                                                    <div class="entry-meta meta-1 font-small color-grey mt-10 pr-5 pl-5">
-                                                                        <span class="post-on">02 Jan</span>
-                                                                        <span class="hit-count has-dot">23k Views</span>
-                                                                        <a class="float-right" href="#" tabindex="0"><i class="ti-heart"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1 text-left">
-                                                        <div class="post-thumb position-relative">
-                                                            <div class="thumb-overlay img-hover-slide border-radius-5 position-relative" style="background-image: url(assets/imgs/news-2.jpg)">
-                                                                <a class="img-link" href="single.html" tabindex="0"></a>
-                                                                <div class="post-content-overlay">
-                                                                    <div class="entry-meta meta-0 font-small mb-10">
-                                                                        <a href="category.html" tabindex="0"><span class="post-cat background7 color-white">Travel</span></a>
-                                                                    </div>
-                                                                    <h6 class="post-title">
-                                                                        <a class="color-white" href="single.html" tabindex="0">Tesla’s Cooking Up A New Way To Wire Its Cars, Report Says</a>
-                                                                    </h6>
-                                                                    <div class="entry-meta meta-1 font-small color-grey mt-10 pr-5 pl-5">
-                                                                        <span class="post-on">02 Jan</span>
-                                                                        <span class="hit-count has-dot">23k Views</span>
-                                                                        <a class="float-right" href="#" tabindex="0"><i class="ti-heart"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1 text-left">
-                                                        <div class="post-thumb position-relative">
-                                                            <div class="thumb-overlay img-hover-slide border-radius-5 position-relative" style="background-image: url(assets/imgs/news-6.jpg)">
-                                                                <a class="img-link" href="single.html" tabindex="0"></a>
-                                                                <div class="post-content-overlay">
-                                                                    <div class="entry-meta meta-0 font-small mb-10">
-                                                                        <a href="category.html" tabindex="0"><span class="post-cat background4 color-white">World</span></a>
-                                                                    </div>
-                                                                    <h6 class="post-title">
-                                                                        <a class="color-white" href="single.html" tabindex="0">Tesla’s Cooking Up A New Way To Wire Its Cars, Report Says</a>
-                                                                    </h6>
-                                                                    <div class="entry-meta meta-1 font-small color-grey mt-10 pr-5 pl-5">
-                                                                        <span class="post-on">02 Jan</span>
-                                                                        <span class="hit-count has-dot">23k Views</span>
-                                                                        <a class="float-right" href="#" tabindex="0"><i class="ti-heart"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1 text-left">
-                                                        <div class="post-thumb position-relative">
-                                                            <div class="thumb-overlay img-hover-slide border-radius-5 position-relative" style="background-image: url(assets/imgs/news-15.jpg)">
-                                                                <a class="img-link" href="single.html" tabindex="0"></a>
-                                                                <div class="post-content-overlay">
-                                                                    <div class="entry-meta meta-0 font-small mb-10">
-                                                                        <a href="category.html" tabindex="0"><span class="post-cat background3 color-white">Fashion</span></a>
-                                                                    </div>
-                                                                    <h6 class="post-title">
-                                                                        <a class="color-white" href="single.html" tabindex="0">Tesla’s Cooking Up A New Way To Wire Its Cars, Report Says</a>
-                                                                    </h6>
-                                                                    <div class="entry-meta meta-1 font-small color-grey mt-10 pr-5 pl-5">
-                                                                        <span class="post-on">02 Jan</span>
-                                                                        <span class="hit-count has-dot">23k Views</span>
-                                                                        <a class="float-right" href="#" tabindex="0"><i class="ti-heart"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane" id="news-3" role="tabpanel">
-                                                <div class="row">
-                                                    <div class="col-3 post-module-1 text-left">
-                                                        <div class="post-thumb position-relative">
-                                                            <div class="thumb-overlay img-hover-slide border-radius-5 position-relative" style="background-image: url({{ url_for('static', filename = 'assets/imgs/thumbnail-1.jpg') }})">
-                                                                <a class="img-link" href="#" tabindex="0"></a>
-                                                                <span class="top-right-icon background3">
-                                                                    <i class="mdi mdi-videocam"></i>
-                                                                </span>
-                                                                <div class="post-content-overlay">
-                                                                    <div class="entry-meta meta-0 font-small mb-10">
-                                                                        <a href="#" tabindex="0"><span class="post-cat background2 color-white">Gaming</span></a>
-                                                                    </div>
-                                                                    <h6 class="post-title">
-                                                                        <a class="color-white" href="#" tabindex="0">Tesla’s Cooking Up A New Way To Wire Its Cars, Report Says</a>
-                                                                    </h6>
-                                                                    <div class="entry-meta meta-1 font-small color-grey mt-10 pr-5 pl-5">
-                                                                        <span class="post-on">02 Jan</span>
-                                                                        <span class="hit-count has-dot">23k Views</span>
-                                                                        <a class="float-right" href="#" tabindex="0"><i class="ti-heart"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1 text-left">
-                                                        <div class="post-thumb position-relative">
-                                                            <div class="thumb-overlay img-hover-slide border-radius-5 position-relative" style="background-image: url(assets/imgs/thumbnail-2.jpg)">
-                                                                <a class="img-link" href="single.html" tabindex="0"></a>
-                                                                <div class="post-content-overlay">
-                                                                    <div class="entry-meta meta-0 font-small mb-10">
-                                                                        <a href="category.html" tabindex="0"><span class="post-cat background7 color-white">Travel</span></a>
-                                                                    </div>
-                                                                    <h6 class="post-title">
-                                                                        <a class="color-white" href="single.html" tabindex="0">Tesla’s Cooking Up A New Way To Wire Its Cars, Report Says</a>
-                                                                    </h6>
-                                                                    <div class="entry-meta meta-1 font-small color-grey mt-10 pr-5 pl-5">
-                                                                        <span class="post-on">02 Jan</span>
-                                                                        <span class="hit-count has-dot">23k Views</span>
-                                                                        <a class="float-right" href="#" tabindex="0"><i class="ti-heart"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1 text-left">
-                                                        <div class="post-thumb position-relative">
-                                                            <div class="thumb-overlay img-hover-slide border-radius-5 position-relative" style="background-image: url(assets/imgs/thumbnail-3.jpg)">
-                                                                <a class="img-link" href="single.html" tabindex="0"></a>
-                                                                <div class="post-content-overlay">
-                                                                    <div class="entry-meta meta-0 font-small mb-10">
-                                                                        <a href="category.html" tabindex="0"><span class="post-cat background4 color-white">World</span></a>
-                                                                    </div>
-                                                                    <h6 class="post-title">
-                                                                        <a class="color-white" href="single.html" tabindex="0">Tesla’s Cooking Up A New Way To Wire Its Cars, Report Says</a>
-                                                                    </h6>
-                                                                    <div class="entry-meta meta-1 font-small color-grey mt-10 pr-5 pl-5">
-                                                                        <span class="post-on">02 Jan</span>
-                                                                        <span class="hit-count has-dot">23k Views</span>
-                                                                        <a class="float-right" href="#" tabindex="0"><i class="ti-heart"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 post-module-1 text-left">
-                                                        <div class="post-thumb position-relative">
-                                                            <div class="thumb-overlay img-hover-slide border-radius-5 position-relative" style="background-image: url(assets/imgs/thumbnail-7.jpg)">
-                                                                <a class="img-link" href="single.html" tabindex="0"></a>
-                                                                <div class="post-content-overlay">
-                                                                    <div class="entry-meta meta-0 font-small mb-10">
-                                                                        <a href="category.html" tabindex="0"><span class="post-cat background3 color-white">Fashion</span></a>
-                                                                    </div>
-                                                                    <h6 class="post-title">
-                                                                        <a class="color-white" href="single.html" tabindex="0">Tesla’s Cooking Up A New Way To Wire Its Cars, Report Says</a>
-                                                                    </h6>
-                                                                    <div class="entry-meta meta-1 font-small color-grey mt-10 pr-5 pl-5">
-                                                                        <span class="post-on">02 Jan</span>
-                                                                        <span class="hit-count has-dot">23k Views</span>
-                                                                        <a class="float-right" href="#" tabindex="0"><i class="ti-heart"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <a href="/">Home</a>
                                 </li>
                                 <li class="menu-item-has-children"><a href="#">Pages</a>
                                     <ul class="sub-menu">

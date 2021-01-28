@@ -19,7 +19,7 @@
         </h3>
         <h5>About openstack.top</h5>
         <div id="oneWord" class="author-description"></div>
-        <a href="#" class="author-bio-link">View all posts</a>
+        <a href="/loveme" class="author-bio-link">View all posts</a>
 
 	<div onclick="giveLike()" id="givelike" ><i class="ti-facebook"></i></div>
 
@@ -33,10 +33,36 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- test pic col-lg-8 col-md-12 col-sm-12 -->
+<div class="col-lg-3 col-md-6 col-sm-12 post-module-1 text-left">
+	<div class="post-thumb position-relative">
+		<div class="thumb-overlay img-hover-slide border-radius-5 position-relative" style="background-image: url({{ url_for('static', filename = 'assets/imgs/thumbnail-1.jpg') }})">
+			<a class="img-link" href="#" tabindex="0"></a>
+			<span class="top-right-icon background3">
+				<i class="mdi mdi-videocam"></i>
+			</span>
+			<div class="post-content-overlay">
+				<div class="entry-meta meta-0 font-small mb-10">
+					<a href="#" tabindex="0"><span class="post-cat background2 color-white">Gaming</span></a>
+				</div>
+				<h6 class="post-title">
+					<a class="color-white" href="#" tabindex="0">Tesla’s Cooking Up A New Way To Wire Its Cars, Report Says</a>
+				</h6>
+				<div class="entry-meta meta-1 font-small color-grey mt-10 pr-5 pl-5">
+					<span class="post-on">02 Jan</span>
+					<span class="hit-count has-dot">23k Views</span>
+					<a class="float-right" href="#" tabindex="0"><i class="ti-heart"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <!--related posts-->
 <div class="related-posts">
     <h3 class="mb-30">Related posts</h3>
-    {% include "main/_flash.html"  %}
     <div class="loop-list">
         {% for blog in blogs %}
         <article class="row mb-30">
